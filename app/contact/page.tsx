@@ -103,13 +103,13 @@ export default function ContactPage() {
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="from_email">Email Address *</Label>
-                        <Input id="from_email" name="from_email" type="email" required placeholder="aawashcsitan@gmail.com" />
+                        <Input id="from_email" name="from_email" type="email" required placeholder="john@gmail.com" />
                       </div>
                     </div>
                     <div className="grid sm:grid-cols-2 gap-6">
                       <div className="space-y-2">
                         <Label htmlFor="phone">Phone Number</Label>
-                        <Input id="phone" name="phone" placeholder="+977 982-5855790" />
+                        <Input id="phone" name="phone" placeholder="+00 000 000 000" />
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="service">Service Required</Label>
