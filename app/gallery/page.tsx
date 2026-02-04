@@ -1,250 +1,205 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Metadata } from "next"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import { ArrowRight, X } from "lucide-react"
+import React, { useState, useRef } from "react";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { useToast } from "@/hooks/use-toast";
+import emailjs from "@emailjs/browser";
+import {
+  Phone,
+  Mail,
+  Clock,
+  CheckCircle,
+  Send,
+} from "lucide-react";
 
-const categories = ["All", "Residential", "Commercial", "Interior", "Exterior"]
+const services = [
+  "Residential Painting",
+  "Commercial Painting",
+  "Interior Painting",
+  "Exterior Painting",
+  "Roof Painting",
+  "Other",
+];
 
-const projects = [
-  {
-    id: 1,
-    title: "Modern Family Home",
-    category: "Residential",
-    image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop",
-    description: "Complete interior and exterior repaint with modern colour palette",
-  },
-  {
-    id: 2,
-    title: "Corporate Office Fitout",
-    category: "Commercial",
-    image:
-      "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop",
-    description: "Professional office painting with minimal business disruption",
-  },
-  {
-    id: 3,
-    title: "Living Room Transformation",
-    category: "Interior",
-    image:
-      "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop",
-    description: "Feature wall and ceiling repaint with designer finishes",
-  },
-  {
-    id: 4,
-    title: "Heritage Home Exterior",
-    category: "Exterior",
-    image:
-      "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=2070&auto=format&fit=crop",
-    description: "Careful restoration and repainting of heritage facade",
-  },
-  {
-    id: 5,
-    title: "Apartment Complex",
-    category: "Commercial",
-    image:
-      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1935&auto=format&fit=crop",
-    description: "Multi-unit strata painting project completed on schedule",
-  },
-  {
-    id: 6,
-    title: "Kitchen Refresh",
-    category: "Interior",
-    image:
-      "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=2070&auto=format&fit=crop",
-    description: "Cabinet painting and wall refresh for modern kitchen upgrade",
-  },
-  {
-    id: 7,
-    title: "Coastal Beach House",
-    category: "Residential",
-    image:
-      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto=format&fit=crop",
-    description: "Weather-resistant exterior painting for coastal property",
-  },
-  {
-    id: 8,
-    title: "Retail Storefront",
-    category: "Commercial",
-    image:
-      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070&auto=format&fit=crop",
-    description: "Eye-catching storefront painting to attract customers",
-  },
-  {
-    id: 9,
-    title: "Bedroom Suite",
-    category: "Interior",
-    image:
-      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=2070&auto=format&fit=crop",
-    description: "Calming colour scheme for master bedroom suite",
-  },
-  {
-    id: 10,
-    title: "Weatherboard Home",
-    category: "Exterior",
-    image:
-      "https://images.unsplash.com/photo-1598228723793-52759bba239c?q=80&w=1974&auto=format&fit=crop",
-    description: "Complete weatherboard preparation and premium paint finish",
-  },
-  {
-    id: 11,
-    title: "Contemporary Townhouse",
-    category: "Residential",
-    image:
-      "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?q=80&w=1974&auto=format&fit=crop",
-    description: "Modern colour scheme for contemporary townhouse",
-  },
-  {
-    id: 12,
-    title: "Warehouse Conversion",
-    category: "Commercial",
-    image:
-      "https://images.unsplash.com/photo-1504297050568-910d24c426d3?q=80&w=1974&auto=format&fit=crop",
-    description: "Industrial space transformation with specialty finishes",
-  },
-]
+const serviceAreas = [
+  "Sydney CBD", "Eastern Suburbs", "Northern Beaches",
+  "North Shore", "Inner West", "Western Sydney",
+  "Southern Sydney", "Hills District"
+];
 
-export default function GalleryPage() {
-  const [activeCategory, setActiveCategory] = useState("All")
-  const [selectedProject, setSelectedProject] = useState<(typeof projects)[0] | null>(null)
+export default function ContactPage() {
+  const { toast } = useToast();
+  const form = useRef<HTMLFormElement>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const filteredProjects =
-    activeCategory === "All"
-      ? projects
-      : projects.filter((p) => p.category === activeCategory)
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!form.current) return;
+    
+    setIsSubmitting(true);
+
+    // Using credentials from your working reference project
+    emailjs
+      .sendForm("service_1295ne8", "template_k6c5ccb", form.current, {
+        publicKey: "pzd5H6YPeo7pn9DcZ",
+      })
+      .then(
+        () => {
+          toast({
+            variant: "default",
+            description: "Your Message has been sent successfully!",
+          });
+          setIsSubmitted(true);
+          form.current?.reset();
+        },
+        (error) => {
+          console.error("EmailJS Error:", error);
+          toast({
+            variant: "destructive",
+            title: "Uh oh! Something went wrong.",
+            description: "Please try again later.",
+          });
+        }
+      )
+      .finally(() => setIsSubmitting(false));
+  };
 
   return (
     <>
       <Header />
       <main className="pt-20">
-        {/* Hero Section */}
-        <section className="bg-muted py-20 lg:py-28">
+        {/* Hero Section - Matched to image_789f61.png */}
+        <section className="bg-slate-50 py-20 lg:py-28">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <span className="text-primary font-semibold text-sm uppercase tracking-wider">
-              Our Portfolio
+            <span className="text-sky-500 font-semibold text-sm uppercase tracking-widest">
+              CONTACT US
             </span>
-            <h1 className="text-4xl sm:text-5xl font-bold text-foreground mt-3 mb-6 text-balance">
-              Project Gallery
+            <h1 className="text-5xl sm:text-7xl font-bold text-slate-900 mt-4 mb-8">
+              Get Your Free Quote
             </h1>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto leading-relaxed">
-              Browse our collection of completed painting projects. Each project showcases our commitment to quality craftsmanship and attention to detail.
+            
+            <p className="text-slate-600 text-xl max-w-4xl mx-auto leading-relaxed">
+              Ready to transform your space? Contact us today for a free, no-obligation quote. <br className="hidden md:block" />
+              Our team is here to help bring your vision to life.
             </p>
           </div>
         </section>
 
-        {/* Filter Tabs */}
-        <section className="py-8 border-b border-border">
+        {/* Contact Content Area - Matched to image_789b61.png */}
+        <section className="py-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-wrap gap-2 justify-center">
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  onClick={() => setActiveCategory(category)}
-                  className={`px-5 py-2.5 rounded-full text-sm font-medium transition-colors ${
-                    activeCategory === category
-                      ? "bg-primary text-primary-foreground"
-                      : "bg-muted text-muted-foreground hover:bg-muted/80"
-                  }`}
-                >
-                  {category}
-                </button>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Gallery Grid */}
-        <section className="py-16 lg:py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredProjects.map((project) => (
-                <button
-                  key={project.id}
-                  onClick={() => setSelectedProject(project)}
-                  className="group relative aspect-[4/3] rounded-xl overflow-hidden bg-muted text-left"
-                >
-                  <img
-                    src={project.image || "/placeholder.svg"}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-foreground/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                    <span className="text-secondary text-sm font-medium mb-1">
-                      {project.category}
-                    </span>
-                    <h3 className="text-background text-xl font-semibold">
-                      {project.title}
-                    </h3>
+            <div className="grid lg:grid-cols-12 gap-16 items-start">
+              
+              {/* LEFT SIDE: Send Us a Message */}
+              <div className="lg:col-span-7">
+                <h2 className="text-3xl font-bold text-slate-900 mb-8">Send Us a Message</h2>
+                {isSubmitted ? (
+                  <div className="bg-emerald-50 p-12 rounded-2xl text-center border border-emerald-100">
+                    <CheckCircle className="w-16 h-16 text-emerald-500 mx-auto mb-4" />
+                    <h3 className="text-2xl font-bold text-emerald-900 mb-2">Thank You!</h3>
+                    <p className="text-emerald-700">We'll get back to you within 24 hours.</p>
+                    <Button onClick={() => setIsSubmitted(false)} className="mt-6" variant="outline">
+                      Send Another Message
+                    </Button>
                   </div>
-                </button>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Lightbox */}
-        {selectedProject && (
-          <div
-            className="fixed inset-0 z-50 bg-foreground/90 flex items-center justify-center p-4"
-            onClick={() => setSelectedProject(null)}
-          >
-            <div
-              className="bg-background rounded-2xl max-w-4xl w-full overflow-hidden"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="relative">
-                <img
-                  src={selectedProject.image || "/placeholder.svg"}
-                  alt={selectedProject.title}
-                  className="w-full aspect-video object-cover"
-                />
-                <button
-                  onClick={() => setSelectedProject(null)}
-                  className="absolute top-4 right-4 w-10 h-10 bg-background/90 rounded-full flex items-center justify-center hover:bg-background transition-colors"
-                  aria-label="Close lightbox"
-                >
-                  <X className="w-5 h-5" />
-                </button>
+                ) : (
+                  <form ref={form} onSubmit={onSubmit} className="space-y-8">
+                    <div className="grid sm:grid-cols-2 gap-8">
+                      <div className="space-y-2">
+                        <Label htmlFor="from_name" className="text-slate-900 font-medium">Full Name *</Label>
+                        <Input id="from_name" name="from_name" required placeholder="John Smith" className="h-12" />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="from_email" className="text-slate-900 font-medium">Email Address *</Label>
+                        <Input id="from_email" name="from_email" type="email" required placeholder="john@example.com" className="h-12" />
+                      </div>
+                    </div>
+                    <div className="grid sm:grid-cols-2 gap-8">
+                      <div className="space-y-2">
+                        <Label htmlFor="phone" className="text-slate-900 font-medium">Phone Number</Label>
+                        <Input id="phone" name="phone" placeholder="0400 000 000" className="h-12" />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="service" className="text-slate-900 font-medium">Service Required</Label>
+                        <select 
+                          name="service" 
+                          className="flex h-12 w-full rounded-md border border-input bg-white px-3 py-2 text-sm ring-offset-background focus:ring-2 focus:ring-sky-500 outline-none transition-all"
+                        >
+                          <option value="">Select a service</option>
+                          {services.map((s) => <option key={s} value={s}>{s}</option>)}
+                        </select>
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="message" className="text-slate-900 font-medium">Your Message *</Label>
+                      <Textarea id="message" name="message" required rows={6} placeholder="Tell us about your project..." />
+                    </div>
+                    <Button type="submit" size="lg" disabled={isSubmitting} className="w-full sm:w-auto bg-sky-600 hover:bg-sky-700 text-white h-14 px-10 text-lg">
+                      {isSubmitting ? "Sending..." : <>Send Message <Send className="ml-2 w-5 h-5" /></>}
+                    </Button>
+                  </form>
+                )}
               </div>
-              <div className="p-6">
-                <span className="text-primary text-sm font-medium">
-                  {selectedProject.category}
-                </span>
-                <h2 className="text-2xl font-bold text-foreground mt-1 mb-3">
-                  {selectedProject.title}
-                </h2>
-                <p className="text-muted-foreground leading-relaxed">
-                  {selectedProject.description}
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
 
-        {/* CTA Section */}
-        <section className="py-20 lg:py-28 bg-primary">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold text-primary-foreground mb-4 text-balance">
-              Ready to Start Your Project?
-            </h2>
-            <p className="text-primary-foreground/90 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
-              Let us help you transform your space. Contact us today for a free consultation and quote.
-            </p>
-            <Button size="lg" variant="secondary" asChild>
-              <Link href="/contact">
-                Get Your Free Quote
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Link>
-            </Button>
+              {/* RIGHT SIDE: Contact Information - Matched to image_783a00.png */}
+              <div className="lg:col-span-5 space-y-10">
+                <div>
+                  <h2 className="text-3xl font-bold text-slate-900 mb-6">Contact Information</h2>
+                  <p className="text-slate-600 leading-relaxed mb-10 text-lg">
+                    Have questions or ready to start your painting project? Reach out to us. We typically respond within 24 hours.
+                  </p>
+                  
+                  <div className="space-y-8">
+                    <div className="flex items-start gap-5">
+                      <div className="bg-sky-50 p-4 rounded-xl text-sky-600 shrink-0"><Phone className="w-7 h-7" /></div>
+                      <div>
+                        <h3 className="font-bold text-slate-900 text-lg mb-1">Phone</h3>
+                        <a href="tel:+61415894507" className="text-slate-600 hover:text-sky-600 transition-colors text-lg">+61 415 894 507</a>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-5">
+                      <div className="bg-sky-50 p-4 rounded-xl text-sky-600 shrink-0"><Mail className="w-7 h-7" /></div>
+                      <div>
+                        <h3 className="font-bold text-slate-900 text-lg mb-1">Email</h3>
+                        <a href="mailto:info.majesticpainting@gmail.com" className="text-slate-600 hover:text-sky-600 transition-colors text-lg">info.majesticpainting@gmail.com</a>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-5">
+                      <div className="bg-sky-50 p-4 rounded-xl text-sky-600 shrink-0"><Clock className="w-7 h-7" /></div>
+                      <div>
+                        <h3 className="font-bold text-slate-900 text-lg mb-1">Business Hours</h3>
+                        <p className="text-slate-600 text-lg">Mon - Fri: 7am - 5pm</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Service Areas Box */}
+                <div className="bg-slate-50 p-8 rounded-2xl border border-slate-100">
+                  <h3 className="font-bold text-slate-900 mb-4 text-xl">Service Areas</h3>
+                  <p className="text-slate-600 mb-6">We proudly serve the greater Sydney metropolitan area, including:</p>
+                  <div className="grid grid-cols-2 gap-4">
+                    {serviceAreas.map((area) => (
+                      <div key={area} className="flex items-center gap-3 text-slate-600">
+                        <CheckCircle className="w-5 h-5 text-sky-500 shrink-0" />
+                        <span className="font-medium">{area}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </div>
         </section>
       </main>
       <Footer />
     </>
-  )
+  );
 }
