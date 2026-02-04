@@ -30,8 +30,8 @@ const contactInfo = [
   {
     icon: Mail,
     title: "Email",
-    content: "info.majesticpainting@gmmail.com",
-    href: "info.majesticpainting@gmmail.com",
+    content: "info.majesticpainting@gmail.com",
+    href: "info.majesticpainting@gmail.com",
   },
  
   {
