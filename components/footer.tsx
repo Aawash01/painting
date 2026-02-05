@@ -108,8 +108,8 @@ export function Footer() {
                 <Mail className="w-5 h-5 mt-0.5 shrink-0" />
                 <div>
                   <p className="text-background/70">Email</p>
-                  <a href="mailto:info.majesticpainting@gmail.com" className="hover:text-secondary transition-colors">
-                    info.majesticpainting@gmail.com
+                  <a href="mailto:info.majesticpainters@gmail.com" className="hover:text-secondary transition-colors">
+                   <span>majesticpaiinters@gmail.com</span>
                   </a>
                 </div>
               </li>
