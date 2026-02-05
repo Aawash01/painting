@@ -75,9 +75,9 @@ export function Header() {
                   {link.label}
                 </Link>
               ))}
-              <a href="tel:0400000000" className="flex items-center gap-2 text-primary font-semibold py-2">
+              <a href="tel:+61 415 894 507" className="flex items-center gap-2 text-primary font-semibold py-2">
                 <Phone className="w-5 h-5" />
-                <span>0400 000 000</span>
+                <span>+61 415 894 507</span>
               </a>
               <Button asChild className="w-full mt-2">
                 <Link href="/contact">Get a Quote</Link>

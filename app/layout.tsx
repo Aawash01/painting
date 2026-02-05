@@ -10,23 +10,23 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: 'Majestic Painting | Professional Painting Services',
   description: 'Majestic Painting offers professional residential and commercial painting services. Quality workmanship, competitive prices, and exceptional customer service.',
-  generator: 'v0.app',
+  generator: 'majestic.app',
   icons: {
     icon: [
       {
-        url: '/icon-light-32x32.png',
+        url: '/icon-light-32x32.webp',
         media: '(prefers-color-scheme: light)',
       },
       {
-        url: '/icon-dark-32x32.png',
+        url: '/icon-dark-32x32.svg',
         media: '(prefers-color-scheme: dark)',
       },
       {
-        url: '/icon.svg',
+        url: '/icon.webp',
         type: 'image/svg+xml',
       },
     ],
-    apple: '/apple-icon.png',
+    apple: '/apple-icon.webp',
   },
 }
 
