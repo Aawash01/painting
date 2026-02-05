@@ -159,7 +159,7 @@ export default function ContactPage() {
                       </div>
                       <div>
                         <h3 className="font-bold text-lg mb-1">Email</h3>
-                        <a href="mailto:info.majesticpainting@gmail.com" className="text-muted-foreground hover:text-primary transition-colors text-lg">info.majesticpainting@gmail.com</a>
+                        <a href="mailto:info.majesticpainters@gmail.com" className="text-muted-foreground hover:text-primary transition-colors text-lg">info.majesticpainters@gmail.com</a>
                       </div>
                     </div>
                     <div className="flex items-start gap-5">
