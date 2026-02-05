@@ -46,8 +46,8 @@ export default function ContactPage() {
 
     // Using credentials from your working reference project
     emailjs
-      .sendForm("service_1295ne8", "template_k6c5ccb", form.current, {
-        publicKey: "pzd5H6YPeo7pn9DcZ",
+      .sendForm("service_whblhte", "template_avd2hnw", form.current, {
+        publicKey: "m9zEMwN0BWa9Oy09U",
       })
       .then(
         () => {

@@ -66,18 +66,16 @@ const stats = [
 
 const team = [
   {
-    name: "Michael Thompson",
+    name: "Savan Ali",
     role: "Founder & Lead Painter",
-    image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1974&auto=format&fit=crop",
-    bio: "With over 20 years in the industry, Michael founded Majestic Painting to deliver exceptional quality to Sydney homeowners.",
+    image: "/services/savan.jpeg",
+    bio: "With over 15 years in the industry, Savan  founded Majestic Painting to deliver exceptional quality to Sydney homeowners.",
   },
   {
-    name: "Sarah Chen",
-    role: "Operations Manager",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1974&auto=format&fit=crop",
-    bio: "Sarah ensures every project runs smoothly, coordinating our team and keeping clients informed every step of the way.",
+    name: "Team",
+    role: " Painter",
+    image: "/services/Team.jpeg",
+    bio: "With over 15 years in the industry, Our team  founded Majestic Painting to deliver exceptional quality to Sydney homeowners.",
   },
   {
     name: "David Martinez",
@@ -185,7 +183,7 @@ export default function AboutPage() {
                 </p>
               </div>
               <div className="relative">
-                <div className="aspect-[4/3] rounded-2xl overflow-hidden">
+                <div className="aspect-4/3 rounded-2xl overflow-hidden">
                   <img
                     src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=2070&auto=format&fit=crop"
                     alt="Majestic Painting team at work"
@@ -267,7 +265,7 @@ export default function AboutPage() {
                   key={member.name}
                   className="bg-card rounded-xl overflow-hidden border border-border"
                 >
-                  <div className="aspect-[4/3] overflow-hidden">
+                  <div className="aspect-4/3 overflow-hidden">
                     <img
                       src={member.image || "/placeholder.svg"}
                       alt={member.name}
@@ -382,7 +380,7 @@ export default function AboutPage() {
             <div className="grid md:grid-cols-3 gap-8">
               {blogPosts.map((post) => (
                 <article key={post.title} className="bg-card rounded-xl overflow-hidden border border-border group cursor-pointer">
-                  <div className="aspect-[16/10] overflow-hidden">
+                  <div className="aspect-16/10 overflow-hidden">
                     <img
                       src={post.image || "/placeholder.svg"}
                       alt={post.title}
@@ -531,7 +529,7 @@ export default function AboutPage() {
                 </div>
               </div>
               <div className="relative">
-                <div className="aspect-[4/3] rounded-2xl overflow-hidden">
+                <div className="aspect-4/3 rounded-2xl overflow-hidden">
                   <img
                     src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070&auto=format&fit=crop"
                     alt="Sydney Harbour Bridge and city skyline"
