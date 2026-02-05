@@ -167,7 +167,7 @@ export default function ContactPage() {
                       <div className="bg-sky-50 p-4 rounded-xl text-sky-600 shrink-0"><Mail className="w-7 h-7" /></div>
                       <div>
                         <h3 className="font-bold text-slate-900 text-lg mb-1">Email</h3>
-                        <a href="mailto:info.majesticpainting@gmail.com" className="text-slate-600 hover:text-sky-600 transition-colors text-lg">info.majesticpainting@gmail.com</a>
+                        <a href="mailto:info.majesticpainters@gmail.com" className="text-slate-600 hover:text-sky-600 transition-colors text-lg">info.majesticpainters@gmail.com</a>
                       </div>
                     </div>
                     <div className="flex items-start gap-5">
