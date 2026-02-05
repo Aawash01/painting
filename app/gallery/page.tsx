@@ -123,7 +123,7 @@ export default function ContactPage() {
                     <div className="grid sm:grid-cols-2 gap-8">
                       <div className="space-y-2">
                         <Label htmlFor="phone" className="text-slate-900 font-medium">Phone Number</Label>
-                        <Input id="phone" name="phone" placeholder="0400 000 000" className="h-12" />
+                        <Input id="phone" name="phone" placeholder="+61 415 894 507" className="h-12" />
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="service" className="text-slate-900 font-medium">Service Required</Label>
