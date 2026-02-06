@@ -55,8 +55,7 @@ const projects = [
     id: 6,
     title: "Kitchen Refresh",
     category: "Interior",
-    image:
-      "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?q=80&w=2070&auto=format&fit=crop",
+    image: "/services/kitchen.jpeg",
     description: "Cabinet painting and wall refresh for modern kitchen upgrade",
   },
   {
