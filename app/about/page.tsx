@@ -66,10 +66,10 @@ const stats = [
 
 const team = [
   {
-    name: "Savan Ali",
+    name: "Shaban Ali",
     role: "Founder & Lead Painter",
     image: "/services/savan.jpeg",
-    bio: "With over 15 years in the industry, Savan  founded Majestic Painting to deliver exceptional quality to Sydney homeowners.",
+    bio: "Shaban is the proud owner and senior painter of Majestic Painting and Decorating, bringing over 10 years of hands-on experience in the painting and decorating industry. Known for his precision, reliability, and strong work ethic, Shaban has built a reputation for delivering high-quality finishes across residential, commercial, and renovation projects.",
   },
   {
     name: "Team",
@@ -78,10 +78,9 @@ const team = [
     bio: "With over 15 years in the industry, Our team  founded Majestic Painting to deliver exceptional quality to Sydney homeowners.",
   },
   {
-    name: "David Martinez",
+    name: "Saurav Adhikari",
     role: "Senior Painter",
-    image:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop",
+     image: "/services/saurav.jpeg",
     bio: "David brings 15 years of expertise to every job, specializing in detailed finishes and heritage restorations.",
   },
 ]
