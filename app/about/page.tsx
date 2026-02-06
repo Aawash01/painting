@@ -81,7 +81,7 @@ const team = [
     name: "Saurav Adhikari",
     role: "Senior Painter",
      image: "/services/saurav.jpeg",
-    bio: "David brings 15 years of expertise to every job, specializing in detailed finishes and heritage restorations.",
+    bio: "Saurav is a skilled and reliable painter at Majestic Painting and Decorating, known for his strong work ethic and attention to detail. With hands-on experience in residential and commercial painting, he takes pride in delivering smooth finishes, clean lines, and long-lasting results.",
   },
 ]
 
